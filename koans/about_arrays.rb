@@ -56,31 +56,33 @@ class AboutArrays < Neo::Koan
   def test_slicing_with_ranges
     array = [:peanut, :butter, :and, :jelly]
 
-    assert_equal __, array[0..2]
-    assert_equal __, array[0...2]
-    assert_equal __, array[2..-1]
+    assert_equal [:peanut, :butter, :and], array[0..2]
+    assert_equal [:peanut, :butter] , array[0...2]
+    assert_equal [:and, :jelly], array[2..-1] #REVIEW THIS BEHAVIOUR
   end
 
   def test_pushing_and_popping_arrays
     array = [1,2]
     array.push(:last)
 #=> [1, 2, :last]
-    assert_equal array, array
+    assert_equal [1, 2, :last], array
 
-    popped_value = array.pop
-    assert_equal __, popped_value
-    assert_equal __, array
+    popped_value = array.pop 
+    #popped_value => :last, .pop automatically gets rid of last element of array, however you CAN select.
+    assert_equal :last, popped_value
+    assert_equal [1, 2], array
   end
 
   def test_shifting_arrays
     array = [1,2]
-    array.unshift(:first)
+    array.unshift(:first) #inserts :first to the beginning of the array
+    # array => [:first, 1, 2]
 
-    assert_equal __, array
+    assert_equal [:first, 1, 2], array
 
-    shifted_value = array.shift
-    assert_equal __, shifted_value
-    assert_equal __, array
+    shifted_value = array.shift #shift gets rid of an element in the beginning of array
+    assert_equal :first, shifted_value
+    assert_equal [1, 2], array
   end
 
 end
